@@ -1,4 +1,6 @@
 //json으로 파싱한 후 csv파일로 저장
+//한글 깨짐 -> 엑셀 새로 불러오기 -> 외부 데이터 가져오기 -> 텍스트 -> 두번째창에서 콤마 선택
+
 
 
 from urllib.parse import urlencode, unquote
@@ -9,7 +11,7 @@ import pandas as pd
 url="http://apis.data.go.kr/6480000/gyeongnamgoodrestaurant/gyeongnamgoodrestaurantlist"
 queryString = "?" + urlencode(
     {
-        "Servicekey" : unquote("S0KBesWYXmsPeFI2LdqlgftRMtELQwA%2B35OiXf2xB6wM5vE6cFnEc6ODIV%2FP3Hg56bV%2BhCnmNj6COohvjDLd5Q%3D%3D"),
+        "Servicekey" : unquote("--My service key--"),
         "pageNo" : "1",
         "numOfRows" : "10",
         "resultType" : "json"
