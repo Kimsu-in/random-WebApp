@@ -1,0 +1,26 @@
+//json으로 파싱한 후 csv파일로 저장
+
+
+from urllib.parse import urlencode, unquote
+import requests
+import json
+import pandas as pd
+
+url="http://apis.data.go.kr/6480000/gyeongnamgoodrestaurant/gyeongnamgoodrestaurantlist"
+queryString = "?" + urlencode(
+    {
+        "Servicekey" : unquote("S0KBesWYXmsPeFI2LdqlgftRMtELQwA%2B35OiXf2xB6wM5vE6cFnEc6ODIV%2FP3Hg56bV%2BhCnmNj6COohvjDLd5Q%3D%3D"),
+        "pageNo" : "1",
+        "numOfRows" : "10",
+        "resultType" : "json"
+    }
+)
+queryURL = url + queryString
+response = requests.get(queryURL)
+print("===response json data start===")
+print(response.text)
+
+info = json.loads(response.text)
+
+df = pd.json_normalize(info['gyeongnamgoodrestaurantlist']['item'])
+df.to_csv("C:\git\python\python_practice_01\csv\sample5.csv", encoding='utf-8')
