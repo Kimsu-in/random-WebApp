@@ -26,3 +26,8 @@ info = json.loads(response.text)
 
 df = pd.json_normalize(info['gyeongnamgoodrestaurantlist']['item'])
 df.to_csv("C:\git\python\python_practice_01\csv\sample5.csv", encoding='utf-8')
+
+
+
+//csv파일 sqlite에 넣을때 한글 깨짐 --> 메모장으로 열어서 인코딩을 utf-8로 바꾼뒤 저장
+//sqlite에서 파일 -> 가져오기 ->csv파일 선택
