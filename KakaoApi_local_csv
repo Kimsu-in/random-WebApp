@@ -1,0 +1,17 @@
+//json으로 파싱한 결과 csv파일로 저장하기
+//한글 깨짐 -> 엑셀 새로 불러오기 -> 외부 데이터 가져오기 -> 텍스트 -> 두번째창에서 콤마 선택
+
+import requests
+import json
+import pandas as pd
+import csv
+
+url = "https://dapi.kakao.com/v2/local/search/keyword.json"
+queryString = {"query":"안동시 송천동 음식점"}
+header = {'authorization':'--My api key--'}
+response = requests.get(url, headers=header, params=queryString)
+
+info = json.loads(response.text)
+
+df = pd.json_normalize(info['documents'])
+df.to_csv("C:\git\python\python_practice_01\csv\sample2.csv", encoding='utf-8')
