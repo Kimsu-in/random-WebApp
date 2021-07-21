@@ -6,3 +6,6 @@ queryString = {"query":"안동시 송천동 음식점"}
 header = {'authorization':'KakaoAK --My apiKey--'}
 r = requests.get(url, headers=header, params=queryString)
 print(json.loads(r.text))
+
+
+//내 어플리케이션->고급설정->허용IP주소 
