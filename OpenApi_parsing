@@ -13,7 +13,7 @@ conn = MySQLdb.connect(
 url="http://apis.data.go.kr/6480000/gyeongnamgoodrestaurant/gyeongnamgoodrestaurantlist"
 queryString = "?" + urlencode(
     {
-        "Servicekey" : unquote("--My decoding serviceKey--"),
+        "Servicekey" : unquote("--My serviceKey--"),
         "pageNo" : "1",
         "numOfRows" : "10",
         "resultType" : "json"
