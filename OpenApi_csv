@@ -13,7 +13,7 @@ queryString = "?" + urlencode(
     {
         "Servicekey" : unquote("--My service key--"),
         "pageNo" : "1",
-        "numOfRows" : "10",
+        "numOfRows" : "1000",
         "resultType" : "json"
     }
 )
