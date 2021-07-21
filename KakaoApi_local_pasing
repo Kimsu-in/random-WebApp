@@ -1,0 +1,8 @@
+import requests
+import json
+
+url = "https://dapi.kakao.com/v2/local/search/keyword.json"
+queryString = {"query":"안동시 송천동 음식점"}
+header = {'authorization':'KakaoAK --My apiKey--'}
+r = requests.get(url, headers=header, params=queryString)
+print(json.loads(r.text))
