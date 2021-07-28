@@ -1,0 +1,35 @@
+//세번 반복해서 넣어주니 너무 길어서 for i in range를 사용하여 page를 하나씩 올려줌
+
+import requests
+import json
+import pandas as pd
+import sqlite3
+
+
+conn = sqlite3.connect("C:/DB.Browser.for.SQLite-3.12.2-win64/DB Browser for SQLite/db/random.db",
+                           isolation_level=None)
+cur = conn.cursor()
+
+cur.execute("DROP TABLE IF EXISTS Kakao")
+cur.execute("CREATE TABLE Kakao(Id int, Name text, Category text, Address text, Phone text, Url text)")
+
+for i in range(1, 4):
+    url = "https://dapi.kakao.com/v2/local/search/keyword.json"
+    queryString = {"query":"안동시 송천동", "category_group_code":"FD6","page":i}
+    header = {'authorization':'KakaoAK <--api -->'}
+    response = requests.get(url, headers=header, params=queryString)
+
+    json_object = response.json()
+
+    for item in json_object['documents']:
+        idd = item['id']
+        name = item['place_name']
+        cate = item['category_name']
+        addr = item['road_address_name']
+        number = item['phone']
+        urll = item['place_url']
+
+        cur.execute("INSERT into Kakao(Id, Name, Category, Address, Phone, Url) VALUES (?,?,?,?,?,?)", (idd, name, cate, addr, number, urll))
+        conn.commit()
+
+conn.close()
