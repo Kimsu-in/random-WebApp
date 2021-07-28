@@ -15,7 +15,7 @@ cur.execute("CREATE TABLE Kakao(Id int, Name text, Category text, Address text, 
 
 url = "https://dapi.kakao.com/v2/local/search/keyword.json"
 queryString = {"query":"안동시 송천동", "category_group_code":"FD6","page":"1"}
-header = {'authorization':'KakaoAK 3b76fad81ec824fbb881f96c617cda0e'}
+header = {'authorization':'KakaoAK <--api -->'}
 response = requests.get(url, headers=header, params=queryString)
 
 json_object = response.json()
