@@ -1,0 +1,70 @@
+//page가 달라서 똑같은 코드 3번 넣어줌
+
+import requests
+import json
+import pandas as pd
+import sqlite3
+
+
+conn = sqlite3.connect("C:/DB.Browser.for.SQLite-3.12.2-win64/DB Browser for SQLite/db/random.db",
+                           isolation_level=None)
+cur = conn.cursor()
+
+cur.execute("DROP TABLE IF EXISTS Kakao")
+cur.execute("CREATE TABLE Kakao(Id int, Name text, Category text, Address text, Phone text, Url text)")
+
+url = "https://dapi.kakao.com/v2/local/search/keyword.json"
+queryString = {"query":"안동시 송천동", "category_group_code":"FD6","page":"1"}
+header = {'authorization':'KakaoAK 3b76fad81ec824fbb881f96c617cda0e'}
+response = requests.get(url, headers=header, params=queryString)
+
+json_object = response.json()
+
+for item in json_object['documents']:
+    idd = item['id']
+    name = item['place_name']
+    cate = item['category_name']
+    addr = item['road_address_name']
+    number = item['phone']
+    urll = item['place_url']
+
+    cur.execute("INSERT into Kakao(Id, Name, Category, Address, Phone, Url) VALUES (?,?,?,?,?,?)", (idd, name, cate, addr, number, urll))
+    conn.commit()
+
+url = "https://dapi.kakao.com/v2/local/search/keyword.json"
+queryString = {"query":"안동시 송천동", "category_group_code":"FD6","page":"2"}
+header = {'authorization':'KakaoAK 3b76fad81ec824fbb881f96c617cda0e'}
+response = requests.get(url, headers=header, params=queryString)
+
+json_object = response.json()
+
+for item in json_object['documents']:
+    idd = item['id']
+    name = item['place_name']
+    cate = item['category_name']
+    addr = item['road_address_name']
+    number = item['phone']
+    urll = item['place_url']
+
+    cur.execute("INSERT into Kakao(Id, Name, Category, Address, Phone, Url) VALUES (?,?,?,?,?,?)", (idd, name, cate, addr, number, urll))
+    conn.commit()
+
+url = "https://dapi.kakao.com/v2/local/search/keyword.json"
+queryString = {"query":"안동시 송천동", "category_group_code":"FD6","page":"3"}
+header = {'authorization':'KakaoAK 3b76fad81ec824fbb881f96c617cda0e'}
+response = requests.get(url, headers=header, params=queryString)
+
+json_object = response.json()
+
+for item in json_object['documents']:
+    idd = item['id']
+    name = item['place_name']
+    cate = item['category_name']
+    addr = item['road_address_name']
+    number = item['phone']
+    urll = item['place_url']
+
+    cur.execute("INSERT into Kakao(Id, Name, Category, Address, Phone, Url) VALUES (?,?,?,?,?,?)", (idd, name, cate, addr, number, urll))
+    conn.commit()
+
+conn.close()
